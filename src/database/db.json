@@ -142,6 +142,26 @@
       "id": "3dc53bc8-27b8-4773-b85d-89f0a354d437",
       "createdAt": "4/25/2022, 2:56:03 PM",
       "updatedAt": "4/25/2022, 2:56:03 PM"
+    },
+    {
+      "id": "fe0f9195-187c-4be2-9b17-df0094eca563",
+      "name": "Ring Fit",
+      "mode": "For Time",
+      "equipment": [
+        "switch",
+        "ring attachment"
+      ],
+      "exercises": [
+        "20 crunches",
+        "20 pushups",
+        "20 jumping jacks"
+      ],
+      "trainerTips": [
+        "Do the whole exercise in 3 reps",
+        "Try to do them with only 5 second breaks in-between"
+      ],
+      "createdAt": "10/29/2022, 3:17:16 AM",
+      "updatedAt": "10/29/2022, 3:17:16 AM"
     }
   ],
   "members": [

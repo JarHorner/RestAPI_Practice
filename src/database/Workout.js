@@ -1,6 +1,48 @@
 const DB = require("./db.json")
 const { saveToDatabase } = require("./utils")
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Workout:
+ *       type: object
+ *       properties:
+ *         name: 
+ *           type: string
+ *           example: Tommy V  
+ *         mode:
+ *           type: string
+ *           example: For Time
+ *         equipment:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["barbell", "rope"]
+ *         exercises:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["21 thrusters", "12 rope climbs, 15 ft", "15 thrusters", "9 rope climbs, 15 ft", "9 thrusters", "6 rope climbs, 15 ft"]
+ *         id: 
+ *           type: string
+ *           example: 61dbae02-c147-4e28-863c-db7bd402b2d6
+ *           readOnly: true
+ *         createdAt:
+ *           type: string
+ *           example: 4/20/2022, 2:21:56 PM
+ *           readOnly: true
+ *         updatedAt: 
+ *           type: string
+ *           example: 4/20/2022, 2:21:56 PM
+ *           readOnly: true
+ *         trainerTips:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["Split the 21 thrusters as needed", "Try to do the 9 and 6 thrusters unbroken", "RX Weights: 115lb/75lb"]
+ */
+
 const getAllWorkouts = (filterParams) => {
     try {
         let workouts = DB.workouts;
@@ -18,6 +60,26 @@ const getAllWorkouts = (filterParams) => {
             return workouts.sort(function (a, b) {
                 return a.name.localeCompare(b.name)
             }).slice(0,filterParams.length)
+        }
+        if (filterParams.sort) {
+            if (filterParams.sort === "createdAt")
+            {
+                return workouts.sort(function (a, b) {
+                    return new Date(b.createdAt) - new Date(a.createdAt)
+                })
+            }
+            else if (filterParams.sort === "updatedAt")
+            {
+                return workouts.sort(function (a, b) {
+                    return new Date(b.updatedAt) - new Date(a.updatedAt)
+                }) 
+            }
+            else {
+                throw {
+                    status: 400,
+                    message: `Can't sort by '${filterParams.sort}'`,
+                }
+            }
         }
         //other if statements go here for different parameters
         return DB.workouts
